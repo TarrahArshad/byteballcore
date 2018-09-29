@@ -1680,6 +1680,8 @@ function validatePaymentInputsAndOutputs(conn, payload, objAsset, message_index,
 								if (!objAsset || !objAsset.is_private){
 									// for public payments, you can't spend unconfirmed transactions
 									if (src_output.main_chain_index > objValidationState.last_ball_mci || src_output.main_chain_index === null)
+										console.log("LY_DEBUG: src_output.main_chain_index=", src_output.main_chain_index);
+										console.log("LY_DEBUG: objValidationState.last_ball_mci=", objValidationState.last_ball_mci);
 										return cb("src output must be before last ball");
 								}
 								if (src_output.sequence !== 'good') // it is also stable or private
