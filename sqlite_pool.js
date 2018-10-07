@@ -83,7 +83,7 @@ module.exports = function(db_name, MAX_CONNECTIONS, bReadOnly){
 					last_arg = function(){};
 
 				var sql = arguments[0];
-				console.log("======= query: "+sql);
+				//console.log("======= query: "+sql);
 				var bSelect = !!sql.match(/^SELECT/i);
 				var count_arguments_without_callback = bHasCallback ? (arguments.length-1) : arguments.length;
 				var new_args = [];
@@ -97,6 +97,7 @@ module.exports = function(db_name, MAX_CONNECTIONS, bReadOnly){
 				
 				// add callback with error handling
 				new_args.push(function(err, result){
+					console.log("LY_DEBUG======= query done: "+sql, new_args);
 					//console.log("query done: "+sql);
 					if (err){
 						console.error("\nfailed query:", new_args);
