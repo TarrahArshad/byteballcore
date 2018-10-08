@@ -836,6 +836,9 @@ function validateAuthor(conn, objAuthor, objUnit, objValidationState, callback){
 	function checkNoPendingDefinition(){
 		//var next = checkNoPendingOrRetrievableNonserialIncluded;
 		var next = validateDefinition;
+		if (objValidationState.last_ball_mci < 1000) {
+			return next();
+		}
 		//var filter = bNonserial ? "AND sequence='good'" : "";
 	//	var cross = (objValidationState.max_known_mci - objValidationState.last_ball_mci < 1000) ? 'CROSS' : '';
 		conn.query( // _left_ join forces use of indexes in units
