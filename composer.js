@@ -331,7 +331,7 @@ function composeJoint(params){
 					objUnit.last_ball = last_stable_mc_ball;
 					objUnit.last_ball_unit = last_stable_mc_ball_unit;
 					last_ball_mci = last_stable_mc_ball_mci;
-					checkForUnstablePredecessors();
+					// checkForUnstablePredecessors(); // LY_DEBUG disable unstable check
 				}
 			);
 		},
