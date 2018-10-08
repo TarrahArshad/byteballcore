@@ -1682,9 +1682,7 @@ function validatePaymentInputsAndOutputs(conn, payload, objAsset, message_index,
 									if (src_output.main_chain_index > objValidationState.last_ball_mci || src_output.main_chain_index === null) {
 										console.log("LY_DEBUG: src_output.main_chain_index=", src_output.main_chain_index);
 										console.log("LY_DEBUG: objValidationState.last_ball_mci=", objValidationState.last_ball_mci);
-										// return cb("src output must be before last ball");
-										// LY_CHANGE: test for private net payments
-										return checkInputDoubleSpend(cb);
+										return cb("src output must be before last ball");
 									}
 								}
 								if (src_output.sequence !== 'good') // it is also stable or private
