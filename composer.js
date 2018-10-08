@@ -295,6 +295,9 @@ function composeJoint(params){
 				return cb();
 			
 			function checkForUnstablePredecessors(){
+				if (last_ball_mci < 1000) { // LY_DEBUG
+					return cb();
+				}
 				conn.query(
 					// is_stable=0 condition is redundant given that last_ball_mci is stable
 					"SELECT 1 FROM units CROSS JOIN unit_authors USING(unit) \n\
@@ -331,7 +334,7 @@ function composeJoint(params){
 					objUnit.last_ball = last_stable_mc_ball;
 					objUnit.last_ball_unit = last_stable_mc_ball_unit;
 					last_ball_mci = last_stable_mc_ball_mci;
-					// checkForUnstablePredecessors(); // LY_DEBUG disable unstable check
+					checkForUnstablePredecessors(); // LY_DEBUG disable unstable check
 				}
 			);
 		},
