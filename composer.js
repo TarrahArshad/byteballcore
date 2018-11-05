@@ -54,6 +54,10 @@ function composeTextJoint(arrSigningAddresses, arrPayingAddresses, text, signer,
 function composePaymentJoint(arrFromAddresses, arrOutputs, signer, callbacks){
 	composeJoint({paying_addresses: arrFromAddresses, outputs: arrOutputs, signer: signer, callbacks: callbacks});
 }
+
+function composeSpendUnconfirmedPaymentJoint(arrFromAddresses, arrOutputs, signer, callbacks) {
+	composeJoint({spend_unconfirmed: "all", paying_addresses: arrFromAddresses, outputs: arrOutputs, signer: signer, callbacks: callbacks});
+}
 	
 function composePaymentAndTextJoint(arrSigningAddresses, arrPayingAddresses, arrOutputs, text, signer, callbacks){
 	composeJoint({
@@ -812,3 +816,4 @@ exports.composeAndSavePaymentJoint = composeAndSavePaymentJoint;
 
 exports.generateBlinding = generateBlinding;
 exports.getMessageIndexByPayloadHash = getMessageIndexByPayloadHash;
+exports.composeSpendUnconfirmedPaymentJoint = composeSpendUnconfirmedPaymentJoint;
