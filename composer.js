@@ -54,6 +54,10 @@ function composeTextJoint(arrSigningAddresses, arrPayingAddresses, text, signer,
 function composePaymentJoint(arrFromAddresses, arrOutputs, signer, callbacks){
 	composeJoint({paying_addresses: arrFromAddresses, outputs: arrOutputs, signer: signer, callbacks: callbacks});
 }
+
+function composeSpendUnconfirmedPaymentJoint(arrFromAddresses, arrOutputs, signer, callbacks) {
+	composeJoint({spend_unconfirmed: "all", paying_addresses: arrFromAddresses, outputs: arrOutputs, signer: signer, callbacks: callbacks});
+}
 	
 function composePaymentAndTextJoint(arrSigningAddresses, arrPayingAddresses, arrOutputs, text, signer, callbacks){
 	composeJoint({
@@ -295,6 +299,9 @@ function composeJoint(params){
 				return cb();
 			
 			function checkForUnstablePredecessors(){
+				if (last_ball_mci < 1000) { // LY_DEBUG
+					return cb();
+				}
 				conn.query(
 					// is_stable=0 condition is redundant given that last_ball_mci is stable
 					"SELECT 1 FROM units CROSS JOIN unit_authors USING(unit) \n\
@@ -331,7 +338,7 @@ function composeJoint(params){
 					objUnit.last_ball = last_stable_mc_ball;
 					objUnit.last_ball_unit = last_stable_mc_ball_unit;
 					last_ball_mci = last_stable_mc_ball_mci;
-					checkForUnstablePredecessors();
+					checkForUnstablePredecessors(); // LY_DEBUG disable unstable check
 				}
 			);
 		},
@@ -809,3 +816,4 @@ exports.composeAndSavePaymentJoint = composeAndSavePaymentJoint;
 
 exports.generateBlinding = generateBlinding;
 exports.getMessageIndexByPayloadHash = getMessageIndexByPayloadHash;
+exports.composeSpendUnconfirmedPaymentJoint = composeSpendUnconfirmedPaymentJoint;
