@@ -299,7 +299,7 @@ function composeJoint(params){
 				return cb();
 			
 			function checkForUnstablePredecessors(){
-				if (last_ball_mci < 1000) { // LY_DEBUG
+				if (true) { // LY_DEBUG, skip check unstable
 					return cb();
 				}
 				conn.query(
