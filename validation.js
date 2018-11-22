@@ -846,7 +846,7 @@ function validateAuthor(conn, objAuthor, objUnit, objValidationState, callback){
 	function checkNoPendingDefinition(){
 		//var next = checkNoPendingOrRetrievableNonserialIncluded;
 		var next = validateDefinition;
-		if (objValidationState.last_ball_mci < 1000) {
+		if (objValidationState.last_ball_mci < 200000) { // LY_DEBUG, skip
 			return next();
 		}
 		//var filter = bNonserial ? "AND sequence='good'" : "";
